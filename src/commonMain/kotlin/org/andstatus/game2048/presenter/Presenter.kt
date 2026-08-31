@@ -581,6 +581,7 @@ class Presenter(val view: ViewData, history: History) {
             }.let { plies ->
                 view.korgeCoroutineScope.launch {
                     presentFrom(plies, 0)
+                    boardViews.load(model.gamePosition)
                     if (gameMode.modeEnum != GameModeEnum.AI_PLAY || gameMode.speed == 0) {
                         // TODO: This is to hide AI tip. Invent explicit way for that
                         view.mainView.hideStatusBar()
@@ -758,6 +759,7 @@ class Presenter(val view: ViewData, history: History) {
             }.let { plies ->
                 view.korgeCoroutineScope.launch {
                     presentFromReversed(plies, 0)
+                    boardViews.load(model.gamePosition)
                     showMainView()
                     myLogInTest { "presentReversed ${presentedCounter.value} ended" }
                     isPresenting.value = false
